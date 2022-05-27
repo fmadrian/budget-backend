@@ -20,4 +20,6 @@ public class Report {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "reportId", referencedColumnName = "id")
     private List<Item> items;
+    @Column(nullable = false)
+    private Long total;
 }

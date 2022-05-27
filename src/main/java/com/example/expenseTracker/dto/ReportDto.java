@@ -12,4 +12,5 @@ public class ReportDto {
     private Long id;
     private String name;
     private List<ItemDto> items;
+    private Long total;
 }
