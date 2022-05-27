@@ -15,13 +15,8 @@ public class ItemCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
-    @Column(length = 100)
+    @Column(unique = true, length = 100)
     private String name;
-
-    @OneToMany
-    private List<ItemSubcategory> subcategories;
-
     @Lob
     private String notes;
 }

@@ -15,14 +15,11 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
     @OneToOne
     @JoinColumn(name = "subcategoryId", referencedColumnName = "id")
     private ItemSubcategory subcategory;
-
     @Column(nullable = false)
     private BigDecimal total;
-
     @Lob
     private String notes;
 }

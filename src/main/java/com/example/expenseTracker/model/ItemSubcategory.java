@@ -14,10 +14,11 @@ public class ItemSubcategory {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
-    @Column(length = 100)
+    @OneToOne
+    @JoinColumn(name = "categoryId", referencedColumnName = "id")
+    private ItemCategory category;
+    @Column(unique = true, length = 100)
     private String name;
-
     @Lob
     private String notes;
 }
