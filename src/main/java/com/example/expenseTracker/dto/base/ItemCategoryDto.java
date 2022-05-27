@@ -1,17 +1,14 @@
-package com.example.expenseTracker.dto;
+package com.example.expenseTracker.dto.base;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemDto {
+public class ItemCategoryDto {
     private Long id;
-    private ItemSubcategoryDto subcategory;
-    private BigDecimal total;
+    private String name;
     private String notes;
 }

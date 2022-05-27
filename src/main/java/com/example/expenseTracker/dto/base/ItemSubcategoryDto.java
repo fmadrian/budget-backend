@@ -1,17 +1,14 @@
-package com.example.expenseTracker.dto;
+package com.example.expenseTracker.dto.base;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemCategoryDto {
+public class ItemSubcategoryDto {
     private Long id;
     private String name;
-    private List<ItemSubcategoryDto> subcategories;
     private String notes;
 }
