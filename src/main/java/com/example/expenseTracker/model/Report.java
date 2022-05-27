@@ -17,8 +17,6 @@ public class Report {
     private Long id;
     @Column(length = 150)
     private String name;
-    @Column(nullable = false)
-    private boolean deleted;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "reportId", referencedColumnName = "id")
     private List<Item> items;

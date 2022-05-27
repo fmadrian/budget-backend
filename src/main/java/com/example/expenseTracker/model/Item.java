@@ -25,7 +25,4 @@ public class Item {
 
     @Lob
     private String notes;
-
-    @Column(nullable = false)
-    private boolean deleted;
 }

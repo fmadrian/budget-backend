@@ -20,7 +20,4 @@ public class ItemSubcategory {
 
     @Lob
     private String notes;
-
-    @Column(nullable = false)
-    private boolean deleted;
 }
