@@ -10,13 +10,17 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Locale;
+
 @Mapper(componentModel="spring")
 public abstract class ItemSubcategoryMapper {
     @Autowired
     private ItemCategoryRepository itemCategoryRepository;
     @Autowired
     ItemCategoryMapper itemCategoryMapper;
+    Locale locale = Locale.ROOT;
 
+    @Mapping(target = "name", expression = "java(itemSubcategoryRequest.getName().toUpperCase(locale).trim().replace(\" \", \"\"))")
     @Mapping(target = "category", expression = "java(getCategory(itemSubcategoryRequest.getCategoryId()))")
     public abstract ItemSubcategory mapToEntity(ItemSubcategoryRequest itemSubcategoryRequest);
     @Mapping(target = "category", expression = "java(itemCategoryMapper.mapToDto(itemSubcategory.getCategory()))")

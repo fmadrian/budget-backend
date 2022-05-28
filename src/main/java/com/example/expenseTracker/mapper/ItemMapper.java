@@ -11,12 +11,15 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Locale;
+
 @Mapper(componentModel = "spring")
 public abstract class ItemMapper {
     @Autowired
     private ItemSubcategoryRepository itemSubcategoryRepository;
     @Autowired
     ItemSubcategoryMapper itemSubcategoryMapper;
+
     @Mapping(target = "subcategory", expression = "java(getSubcategory(itemRequest.getSubcategoryId()))")
     public abstract Item mapToEntity(ItemRequest itemRequest);
     @Mapping(target = "subcategory", expression = "java(itemSubcategoryMapper.mapToDto(item.getSubcategory()))")
