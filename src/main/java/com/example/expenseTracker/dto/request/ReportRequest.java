@@ -10,6 +10,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ReportRequest extends ReportDto {
     private List<ItemRequest> items;
 }
