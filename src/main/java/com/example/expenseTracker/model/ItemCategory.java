@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -15,8 +16,9 @@ public class ItemCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @NotBlank
     @Column(unique = true, length = 100)
     private String name;
-    @Lob
+    @Column(columnDefinition = "text")
     private String notes;
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @Entity
@@ -17,8 +18,9 @@ public class ItemSubcategory {
     @OneToOne
     @JoinColumn(name = "categoryId", referencedColumnName = "id")
     private ItemCategory category;
+    @NotBlank
     @Column(unique = true, length = 100)
     private String name;
-    @Lob
+    @Column(columnDefinition = "text")
     private String notes;
 }

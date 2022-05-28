@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Data
 @Entity
@@ -20,6 +21,19 @@ public class Item {
     private ItemSubcategory subcategory;
     @Column(nullable = false)
     private BigDecimal total;
-    @Lob
+    @Column(columnDefinition = "text")
     private String notes;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return id.equals(item.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
