@@ -14,7 +14,8 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator_item")
+    @SequenceGenerator(name="generator_item", sequenceName = "sequence_item")
     private Long id;
     @OneToOne
     @JoinColumn(name = "subcategoryId", referencedColumnName = "id")
@@ -23,7 +24,8 @@ public class Item {
     private BigDecimal total;
     @Column(columnDefinition = "text")
     private String notes;
-
+    @Column(nullable = false)
+    private boolean income; // An item is income or an expense.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

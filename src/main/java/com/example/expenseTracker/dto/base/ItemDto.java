@@ -12,4 +12,5 @@ public class ItemDto {
     private Long id;
     private BigDecimal total;
     private String notes;
+    private boolean income;
 }
