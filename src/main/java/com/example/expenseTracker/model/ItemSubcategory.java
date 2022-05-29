@@ -13,7 +13,8 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class ItemSubcategory {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator_itemsubcategory")
+    @SequenceGenerator(name="generator_itemsubcategory", sequenceName = "sequence_itemsubcategory")
     private Long id;
     @OneToOne
     @JoinColumn(name = "categoryId", referencedColumnName = "id")

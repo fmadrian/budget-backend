@@ -14,7 +14,8 @@ import java.util.List;
 @NoArgsConstructor
 public class ItemCategory {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator_itemcategory")
+    @SequenceGenerator(name="generator_itemcategory", sequenceName = "sequence_itemcategory")
     private Long id;
     @NotBlank
     @Column(unique = true, length = 100)
