@@ -11,7 +11,7 @@ import java.util.Locale;
 public abstract class ItemCategoryMapper {
     Locale locale = Locale.ROOT;
 
-    @Mapping(target="name",expression = "java(itemCategoryDto.getName().toUpperCase(locale).trim().replace(\" \", \"\"))")
+    @Mapping(target="name",expression = "java(itemCategoryDto.getName().toUpperCase(locale).trim())")
     public abstract ItemCategory mapToEntity(ItemCategoryDto itemCategoryDto);
     public abstract ItemCategoryDto mapToDto(ItemCategory itemCategory);
 }

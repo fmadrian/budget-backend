@@ -20,7 +20,7 @@ public abstract class ItemSubcategoryMapper {
     ItemCategoryMapper itemCategoryMapper;
     Locale locale = Locale.ROOT;
 
-    @Mapping(target = "name", expression = "java(itemSubcategoryRequest.getName().toUpperCase(locale).trim().replace(\" \", \"\"))")
+    @Mapping(target = "name", expression = "java(itemSubcategoryRequest.getName().toUpperCase(locale).trim())")
     @Mapping(target = "category", expression = "java(getCategory(itemSubcategoryRequest.getCategoryId()))")
     public abstract ItemSubcategory mapToEntity(ItemSubcategoryRequest itemSubcategoryRequest);
     @Mapping(target = "category", expression = "java(itemCategoryMapper.mapToDto(itemSubcategory.getCategory()))")
