@@ -14,7 +14,6 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public abstract class ReportMapper {
@@ -24,6 +23,8 @@ public abstract class ReportMapper {
     @Mapping(target = "date", expression = "java(getInstantFromString(reportRequest.getDate()))")
     @Mapping(target = "name", expression = "java(reportRequest.getName().toUpperCase(locale).trim())")
     @Mapping(target = "items",expression = "java(mapItemsToEntity(reportRequest.getItems()))")
+    @Mapping(target = "income", expression = "java(calculateItems(reportRequest, true))")
+    @Mapping(target = "expenses", expression = "java(calculateItems(reportRequest, false))")
     @Mapping(target = "total",expression = "java(getTotal(reportRequest))")
     public abstract Report mapToEntity(ReportRequest reportRequest);
     @Mapping(target = "date", expression = "java(getStringFromInstant(report.getDate()))")
@@ -45,9 +46,15 @@ public abstract class ReportMapper {
         return instant.toString();
     }
     // Gets the total from the objects.
+    BigDecimal calculateItems(ReportRequest reportRequest, boolean isIncome){
+        // Filtrates income or expenses and returns the sum.
+            return reportRequest.getItems().stream()
+                    .filter(item -> item.isIncome() == isIncome)
+                    .map(item->item.getTotal())
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
     BigDecimal getTotal(ReportRequest reportRequest){
-        return reportRequest.getItems().stream()
-                .map((item)-> item.getTotal()).reduce(BigDecimal.ZERO, BigDecimal::add);
-
+        return calculateItems(reportRequest,true)
+                .subtract(calculateItems(reportRequest,false));
     }
 }

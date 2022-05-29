@@ -12,6 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReportResponse extends ReportDto {
+    private BigDecimal income;
+    private BigDecimal expenses;
     private BigDecimal total;
     private List<ItemResponse> items;
 }
