@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ReportRepository extends JpaRepository<Report, Long> {
@@ -15,4 +16,5 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
     List<Report> findByNameContainsIgnoreCaseAndDateBetween(String name, Instant since, Instant until);
     List<Report> findByNameContainsIgnoreCaseAndDateGreaterThanEqual(String name, Instant since);
     List<Report> findByNameContainsIgnoreCaseAndDateLessThanEqual(String name, Instant until);
+    Optional<Report> findTopByOrderByIdDesc();
 }

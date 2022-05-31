@@ -2,6 +2,7 @@ package com.example.expenseTracker.service;
 
 import com.example.expenseTracker.dto.request.ReportRequest;
 import com.example.expenseTracker.dto.response.ReportResponse;
+import com.example.expenseTracker.exception.NoReportsCreatedException;
 import com.example.expenseTracker.exception.ReportNotFoundException;
 import com.example.expenseTracker.mapper.ReportMapper;
 import com.example.expenseTracker.model.Item;
@@ -72,5 +73,17 @@ public class ReportService {
                 .map(reportMapper :: mapToDto)
                 .collect(Collectors.toList());
 
+    }
+
+    public ReportResponse getById(Long id) {
+        return reportMapper.mapToDto(
+                reportRepository.findById(id)
+                        .orElseThrow(()-> new ReportNotFoundException(id))
+        );
+    }
+
+    public ReportResponse getLastCreated() {
+        return reportMapper.mapToDto(
+                reportRepository.findTopByOrderByIdDesc().orElseThrow(()-> new NoReportsCreatedException()));
     }
 }

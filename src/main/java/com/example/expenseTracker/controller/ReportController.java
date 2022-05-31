@@ -1,6 +1,7 @@
 package com.example.expenseTracker.controller;
 
 import com.example.expenseTracker.dto.request.ReportRequest;
+import com.example.expenseTracker.exception.NoReportsCreatedException;
 import com.example.expenseTracker.exception.ReportNotFoundException;
 import com.example.expenseTracker.service.ReportService;
 import com.example.expenseTracker.service.ResponseService;
@@ -70,4 +71,34 @@ public class ReportController {
             return new ResponseEntity<>(responseService.error(e,httpStatus),httpStatus);
         }
     }
+    @GetMapping("/{id}")
+    public ResponseEntity getById(@PathVariable(name = "id")Long id){
+        HttpStatus httpStatus = null;
+        try {
+            httpStatus = HttpStatus.OK;
+            return new ResponseEntity<>(reportService.getById(id), httpStatus);
+        }catch (ReportNotFoundException e){
+            httpStatus = HttpStatus.NOT_FOUND;
+            return new ResponseEntity<>(responseService.error(e,httpStatus),httpStatus);
+        }catch(Exception e){
+            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<>(responseService.error(e,httpStatus),httpStatus);
+        }
+    }
+
+    @GetMapping("/get-last")
+    public ResponseEntity getLastCreated(){
+        HttpStatus httpStatus = null;
+        try {
+            httpStatus = HttpStatus.OK;
+            return new ResponseEntity<>(reportService.getLastCreated(), httpStatus);
+        }catch (NoReportsCreatedException e){
+            httpStatus = HttpStatus.NOT_FOUND;
+            return new ResponseEntity<>(responseService.error(e,httpStatus),httpStatus);
+        }catch(Exception e){
+            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<>(responseService.error(e,httpStatus),httpStatus);
+        }
+    }
+
 }
