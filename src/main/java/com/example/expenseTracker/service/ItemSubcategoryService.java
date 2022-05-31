@@ -79,4 +79,11 @@ public class ItemSubcategoryService {
                 .map(itemSubcategoryMapper :: mapToDto)
                 .collect(Collectors.toList());
     }
+
+    public ItemSubcategoryResponse getByName(String name) {
+        ItemSubcategory itemSubcategory = itemSubcategoryRepository.findByNameIgnoreCase(name)
+                .orElseThrow(()-> new ItemSubcategoryNotFoundException());
+
+        return itemSubcategoryMapper.mapToDto(itemSubcategory);
+    }
 }

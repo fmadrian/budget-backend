@@ -71,4 +71,19 @@ public class ItemSubcategoryController {
             return new ResponseEntity<>(responseService.error(e,httpStatus),httpStatus);
         }
     }
+    @GetMapping("/get")
+    public ResponseEntity getByName(@RequestParam(name = "name") String name){
+        HttpStatus httpStatus = null;
+        try {
+            httpStatus = HttpStatus.OK;
+
+            return new ResponseEntity<>(itemSubcategoryService.getByName(name), httpStatus);
+        }catch (ItemSubcategoryNotFoundException e){
+            httpStatus = HttpStatus.NOT_FOUND;
+            return new ResponseEntity<>(responseService.error(e,httpStatus),httpStatus);
+        }catch(Exception e){
+            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<>(responseService.error(e,httpStatus),httpStatus);
+        }
+    }
 }
