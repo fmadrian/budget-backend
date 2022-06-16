@@ -69,7 +69,7 @@ public class ReportService {
         }
 
         // Map the results and return them.
-        return reportRepository.findByNameContainsIgnoreCaseAndDateBetween(name,isince,iuntil).stream()
+        return reportRepository.findByNameContainsIgnoreCaseAndDateBetweenOrderByDateAsc(name,isince,iuntil).stream()
                 .map(reportMapper :: mapToDto)
                 .collect(Collectors.toList());
 
