@@ -37,7 +37,3 @@ Follow these steps to deploy the backend.
 [Lombok](https://projectlombok.org/)
 
 [Mapstruct](https://mapstruct.org/)
-
-## See also
-
-[budget - Frontend code](https://github.com/fsv2860/budget-frontend)
