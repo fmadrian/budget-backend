@@ -57,20 +57,6 @@ public class ReportController {
             return new ResponseEntity<>(responseService.error(e,httpStatus),httpStatus);
         }
     }
-    @GetMapping
-    public ResponseEntity get(@RequestParam(name = "name") String name,
-                              @RequestParam(name = "since") String since,
-                              @RequestParam(name = "until") String until){
-        HttpStatus httpStatus = null;
-        try {
-            httpStatus = HttpStatus.OK;
-            return new ResponseEntity<>(reportService.get(name,since,until), httpStatus);
-        }
-        catch(Exception e){
-            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-            return new ResponseEntity<>(responseService.error(e,httpStatus),httpStatus);
-        }
-    }
     @GetMapping("/{id}")
     public ResponseEntity getById(@PathVariable(name = "id")Long id){
         HttpStatus httpStatus = null;
@@ -95,6 +81,43 @@ public class ReportController {
         }catch (NoReportsCreatedException e){
             httpStatus = HttpStatus.NOT_FOUND;
             return new ResponseEntity<>(responseService.error(e,httpStatus),httpStatus);
+        }catch(Exception e){
+            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<>(responseService.error(e,httpStatus),httpStatus);
+        }
+    }
+
+    /**
+     *
+     * @param name Name of the report.
+     * @param since Date since we want to search reports.
+     * @param until Date until we want to search reports.
+     * @param page Page number to be returned.
+     * @param items Amount of items to be returned in a page.
+     * @return
+     */
+    @GetMapping("")
+    public ResponseEntity search(@RequestParam(name="name")String name, @RequestParam(name = "since")String since,
+                                 @RequestParam(name = "until")String until,
+                                 @RequestParam(name = "page",required = false)Integer page,
+                                 @RequestParam(name= "items",required = false) Integer items){
+        HttpStatus httpStatus = null;
+        try{
+            httpStatus = HttpStatus.OK;
+            return new ResponseEntity(reportService.search(name,since,until,page,items), httpStatus);
+        }catch(Exception e){
+            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<>(responseService.error(e,httpStatus),httpStatus);
+        }
+    }
+    @GetMapping("/search-size")
+    public ResponseEntity searchSize(@RequestParam(name="name")String name, @RequestParam(name = "since")String since,
+                                     @RequestParam(name = "until")String until,
+                                     @RequestParam(name= "items",required = false) Integer items){
+        HttpStatus httpStatus = null;
+        try{
+            httpStatus = HttpStatus.OK;
+            return new ResponseEntity(reportService.searchSize(name,since,until,items), httpStatus);
         }catch(Exception e){
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
             return new ResponseEntity<>(responseService.error(e,httpStatus),httpStatus);
