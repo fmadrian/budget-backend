@@ -35,10 +35,11 @@ public class ReportService {
     @Transactional
     public ReportResponse create(ReportRequest reportRequest){
         // Map the report.
-        Report report = reportRepository.save(reportMapper.mapToEntity(reportRequest));
+        Report report = reportMapper.mapToEntity(reportRequest);
         // Save items before saving the report.
         itemRepository.saveAll(report.getItems());
         // Save the report.
+        reportRepository.save(report);
         return reportMapper.mapToDto(report);
     }
     @Transactional
@@ -57,7 +58,7 @@ public class ReportService {
         return reportMapper.mapToDto(reportRepository.save(updatedReport));
     }
     @Transactional
-    public void delete(Long id){
+    public void delete(String id){
         // Search report.
         Report report = reportRepository.findById(id).orElseThrow(()-> new ReportNotFoundException(id));
         // Delete its items before deleting the report.
@@ -83,7 +84,7 @@ public class ReportService {
 
     }
     @Transactional(readOnly = true)
-    public ReportResponse getById(Long id) {
+    public ReportResponse getById(String id) {
         return reportMapper.mapToDto(
                 reportRepository.findById(id)
                         .orElseThrow(()-> new ReportNotFoundException(id))

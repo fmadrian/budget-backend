@@ -3,28 +3,24 @@ package com.example.expenseTracker.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Data
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator_item")
-    @SequenceGenerator(name="generator_item", sequenceName = "sequence_item")
-    private Long id;
-    @OneToOne
-    @JoinColumn(name = "subcategoryId", referencedColumnName = "id")
+    private String id;
+    //@DocumentReference(lazy=true)
+    @DBRef
     private ItemSubcategory subcategory;
-    @Column(nullable = false)
     private BigDecimal total;
-    @Column(columnDefinition = "text")
     private String notes;
-    @Column(nullable = false)
     private boolean income; // An item is income or an expense.
     @Override
     public boolean equals(Object o) {

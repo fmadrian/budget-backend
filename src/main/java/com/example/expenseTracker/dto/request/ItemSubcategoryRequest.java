@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ItemSubcategoryRequest extends ItemSubcategoryDto {
-    private Long categoryId;
+    private String categoryId;
 }

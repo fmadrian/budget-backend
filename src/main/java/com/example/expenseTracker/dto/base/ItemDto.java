@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ItemDto {
-    private Long id;
+    private String id;
     private BigDecimal total;
     private String notes;
     private boolean income;

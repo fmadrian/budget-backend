@@ -16,23 +16,25 @@ Follow these steps to deploy the backend.
 
 1. Install [Java Development Kit](https://www.oracle.com/java) 16.0.1 or superior.
 
-### Initial database setup
+### Database configuration (MongoDB Atlas)
 
-**If you're using a service that provides you a PostgreSQL database you can skip the first two steps.**
+2. Create a database user and the database.
+3. Create a connection string.
 
-2. Install [PostgreSQL](https://www.postgresql.org/).
-3. Create the database user **'budget-db-user'** and then the database **'budget-db'**.
+   - Go your `Database Deployments`.
+   - Click `Create`.
+   - Click `Connect your application`.
+   - Select `Driver` (Java)
+   - Se;ect `Version` (4.3 or later).
 
-### Database configuration
-
-4. Change the (backend) configuration file (**application.properties**) to match your database configuration (url,port, user, password).
+4. Copy the connection string and database name and paste them into the (backend) configuration file (**application.properties**) in the fields **spring.data.mongodb.uri** and **spring.data.mongodb-database**.
 5. Start the server.
 
 ## Built with
 
 [Spring Boot](https://spring.io/projects/spring-boot)
 
-[PostgreSQL](https://www.postgresql.org/)
+[MongoDB Atlas](https://www.mongodb.com/)
 
 [Lombok](https://projectlombok.org/)
 

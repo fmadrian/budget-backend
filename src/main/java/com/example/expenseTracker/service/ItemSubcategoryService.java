@@ -37,7 +37,7 @@ public class ItemSubcategoryService {
         ItemSubcategory itemSubcategory = itemSubcategoryRepository.save(itemSubcategoryMapper.mapToEntity(itemSubcategoryRequest));
         return itemSubcategoryMapper.mapToDto(itemSubcategory);
     }
-    public void delete(Long id){
+    public void delete(String id){
         // Find the subcategory.
         ItemSubcategory itemSubcategory = itemSubcategoryRepository.findById(id).orElseThrow(()-> new ItemSubcategoryNotFoundException(id));
         // Can't delete subcategory that are being used by an item.
@@ -47,7 +47,7 @@ public class ItemSubcategoryService {
         // Delete it.
         itemSubcategoryRepository.delete(itemSubcategory);
     }
-    public List<ItemSubcategoryResponse> get(String name, Long categoryId){
+    public List<ItemSubcategoryResponse> get(String name, String categoryId){
         List <ItemSubcategory> queryResults = null;
         ItemCategory itemCategory = null;
         // Search the category, if there's any.

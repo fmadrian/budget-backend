@@ -34,7 +34,7 @@ public class ItemCategoryService {
         return itemCategoryMapper.mapToDto(itemCategory);
     }
     @Transactional
-    public void delete(Long id){
+    public void delete(String id){
         // Find the subcategory.
         ItemCategory itemCategory = itemCategoryRepository.findById(id).orElseThrow(()-> new ItemCategoryNotFoundException(id));
         // Get every element that uses this subcategory, and change them to null.

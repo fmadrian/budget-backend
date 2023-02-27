@@ -44,7 +44,7 @@ public class ItemCategoryController {
         }
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable(name = "id")Long id){
+    public ResponseEntity delete(@PathVariable(name = "id")String id){
         HttpStatus httpStatus = null;
         try {
             httpStatus = HttpStatus.OK;

@@ -43,7 +43,7 @@ public class ReportController {
         }
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable(name = "id")Long id){
+    public ResponseEntity delete(@PathVariable(name = "id")String id){
         HttpStatus httpStatus = null;
         try {
             httpStatus = HttpStatus.OK;
@@ -58,7 +58,7 @@ public class ReportController {
         }
     }
     @GetMapping("/{id}")
-    public ResponseEntity getById(@PathVariable(name = "id")Long id){
+    public ResponseEntity getById(@PathVariable(name = "id")String id){
         HttpStatus httpStatus = null;
         try {
             httpStatus = HttpStatus.OK;

@@ -44,7 +44,7 @@ public class ItemSubcategoryController {
         }
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable(name = "id")Long id){
+    public ResponseEntity delete(@PathVariable(name = "id")String id){
         HttpStatus httpStatus = null;
         try {
             httpStatus = HttpStatus.OK;
@@ -60,7 +60,7 @@ public class ItemSubcategoryController {
     }
     @GetMapping
     public ResponseEntity get(@RequestParam(name = "name", required = false)String name,
-                              @RequestParam(name = "categoryId", required = false)Long categoryId){
+                              @RequestParam(name = "categoryId", required = false)String categoryId){
         HttpStatus httpStatus = null;
         try {
             httpStatus = HttpStatus.OK;

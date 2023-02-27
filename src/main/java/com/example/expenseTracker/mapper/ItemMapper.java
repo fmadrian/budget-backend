@@ -25,7 +25,7 @@ public abstract class ItemMapper {
     @Mapping(target = "subcategory", expression = "java(itemSubcategoryMapper.mapToDto(item.getSubcategory()))")
     public abstract ItemResponse mapToDto(Item item);
 
-    ItemSubcategory getSubcategory(Long subcategoryId){
+    ItemSubcategory getSubcategory(String subcategoryId){
         if(subcategoryId != null){
             try{
                 return itemSubcategoryRepository.findById(subcategoryId).orElseThrow(()-> new ItemSubcategoryNotFoundException(subcategoryId));

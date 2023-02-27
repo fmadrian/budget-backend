@@ -3,25 +3,21 @@ package com.example.expenseTracker.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-
+@Document
 @Data
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class ItemSubcategory {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator_itemsubcategory")
-    @SequenceGenerator(name="generator_itemsubcategory", sequenceName = "sequence_itemsubcategory")
-    private Long id;
-    @OneToOne
-    @JoinColumn(name = "categoryId", referencedColumnName = "id")
+    private String id;
+    //@DocumentReference(lazy=true)
+    @DBRef
     private ItemCategory category;
-    @NotBlank
-    @Column(unique = true, length = 100)
     private String name;
-    @Column(columnDefinition = "text")
     private String notes;
 }
